@@ -1,6 +1,6 @@
 
 ## Aggregating
-
+---
 #### `.groupby` in pandas:
 ``` python
 (baby                # the dataframe
@@ -16,4 +16,190 @@
 .agg({'Count':['sum']}) # keys = column name; value = agg function(s) to apply
 )
 ```
+## SQL
+---
+### General Syntax:
+```SQL
+SELECT column1, column2, ... 
+FROM table_name 
+[WHERE condition] 
+[GROUP BY column_list] 
+[HAVING group_condition] 
+[ORDER BY column [ASC|DESC]] 
+[LIMIT number] 
+```
+### Selecting Columns and Filtering Rows:
 
+> Select names and salary of employees older than 30
+#### `Pandas`:
+```python
+employees[['name', 'salary']][employees['age'] > 30]
+```
+#### `SQL`:
+```SQL
+SELECT name, salary
+FROM employees
+WHERE age > 30;
+```
+### Sorting:
+
+> Sort employees based on salary in descending order
+#### `Pandas`:
+```Python
+employees.sort_values('salary', ascending=False)
+```
+#### `SQL`:
+```SQL
+SELECT *
+FROM employees
+ORDER BY salary DESC;
+```
+### Aggregation and GROUP BY:
+
+> Aggregate the sum of salary, grouping by department
+#### `Pandas`:
+```Python
+employee.groupby('department_id')['salary'].sum()
+```
+#### `SQL`:
+``` SQL
+SELECT department_id, SUM(salary) as total_salary
+FROM employee
+GROUP BY department_id;
+```
+### Filtering After Aggregation (HAVING):
+
+> Filter salary based on comparison (after aggregation)
+
+#### `Pandas`:
+```Python
+total_salary =
+employee.groupby('department_id')['salary'].sum()
+total_salary[total_salary['salary'] > 150000]
+```
+#### `SQL`:
+``` SQL
+SELECT department_id, SUM(salary) as total_salary
+FROM employee
+GROUP BY department_id
+HAVING SUM(salary) > 150000;
+```
+### Multiple Aggregations:
+
+> Perform multiple aggregations, using multiple variables
+
+#### `Pandas`:
+```Python
+employee.groupby('department_id').agg({'salary': ['mean', 'max', 'min']})
+```
+#### `SQL`:
+```SQL
+SELECT department_id, AVG(salary) AS avg_salary, MAX(salary)
+AS max_salary, MIN(salary) AS min_salary
+FROM employees
+GROUP BY department_id;
+```
+### Joining Tables:
+
+> Join multiple tables, using keys to index the join
+
+#### `Pandas`:
+```Python
+pd.merge(employee, department, on='dept_id', how='inner')
+```
+#### `SQL`:
+```SQL
+SELECT e.*, d.department_name
+FROM employee e
+JOIN department d
+ON e.department_id = d.department_id;
+```
+
+### Filtering on Joined Data:
+
+> Filter after joining data
+
+#### `Pandas`:
+```Python
+merged = pd.merge(employee, department, on='department_id')
+merged[(merged['department_name'] == 'Engineering') &
+(merged['salary'] > 80000)]
+```
+#### `SQL`:
+```SQL
+SELECT e.first_name, e.last_name, e.salary, d.department_name
+FROM employee e
+JOIN department d ON e.department_id = d.department_id
+WHERE d.department_name = 'Engineering' AND e.salary > 80000;
+```
+### Calculated Columns:
+
+> Performing calculations on specific columns
+
+#### `Pandas`:
+```Python
+employee['annual_bonus'] = employees['salary'] * 0.10
+```
+#### `SQL`:
+```SQL
+SELECT first_name, last_name,
+	salary, salary * 0.10 AS annual_bonus
+FROM employee;
+```
+### Subqueries (Nested Queries)
+
+> Self explanatory...
+
+#### `Pandas`:
+```Python
+avg_salary = employee['salary'].mean()
+employee[employee['salary'] > avg_salary]
+```
+#### `SQL`:
+```SQL
+SELECT *
+FROM employee
+WHERE salary > (
+	SELECT AVG(salary) FROM employee
+);
+```
+
+### IN, NOT IN, and EXISTS:
+
+> Discrete filtering
+
+#### `Pandas`:
+```Python
+exclude_depts = department[(department['department_name'] == 'HR') | (department['department)name'] == 'Marketing')]['deparment_id']
+employee[~employee['department_id'].isin(exclude_depts)]
+```
+#### `SQL`:
+```SQL
+SELECT *
+FROM employees
+WHERE department_is NOT IN (SELECT department_id
+	FROM department
+	WHERE department_name = 'HR' OR department_name = 'Marketing');
+```
+### Null Values and Missing Data:
+
+>Null filtering
+
+#### `Pandas`:
+```Python
+employee[employee['salary'].isnull()]
+employee[employee['salary'].notnull()]
+```
+#### `SQL`:
+```SQL
+SELECT * FROM employees WHERE salary IS NULL;
+SELECT * FROM employees WHERE salary IS NOT NULL;
+```
+### Strings in SQL:
+`%s` as a placeholder operator that allows you to pass a specified value into a string. 
+You specify what value you want to place there by using `%` and then what you want to insert. 
+Here's a simple example:
+```Python
+>>> print('hello my name is %s' % 'dan')
+hello my name is dan
+```
