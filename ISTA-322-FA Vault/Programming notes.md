@@ -271,3 +271,63 @@ DROP TABLE enrolled;
 TRUNCATE TABLE enrolled;
 ```
 - `TRUNCATE` deletes data but keeps definition
+
+## Data Manipulation Language (SQL)
+
+### Schema Setup:
+```SQL
+CREATE TABLE student (
+	sId INT PRIMARY KEY,
+	name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE course (
+	cId INT PRIMARY KEY,
+	name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE enrolled (
+	sId INT,
+	cId INT,
+	grade FLOAT,
+	PRIMARY KEY (sId, cId),
+	FOREIGN KEY (sId) REFERENCES student (sId),
+	FOREIGN KEY (cId) REFERENCES course (cId)
+);
+```
+![[Pasted image 20250929193218.png]]
+### Inserting Data:
+- `INSERT INTO`: Adds rows to a table
+##### Adding Students:
+```SQL
+INSERT INTO student ( sId , name ) VALUES (1 , ’ Alice ’);
+INSERT INTO student ( sId , name ) VALUES (2 , ’ Bob ’);
+INSERT INTO student ( sId , name ) VALUES (3 , ’ Sara ’);
+```
+##### Adding Courses:
+```SQL
+INSERT INTO course ( cId , name ) VALUES (480 , ’ Database Systems ’);
+INSERT INTO course ( cId , name ) VALUES (394 , ’ Data Engineering ’);
+```
+##### Enrolling Students in Courses:
+```SQL
+INSERT INTO enrolled ( sId , cId , grade ) VALUES (1 , 480 , 0);
+INSERT INTO enrolled ( sId , cId , grade ) VALUES (2 , 394 , 0);
+INSERT INTO enrolled ( sId , cId , grade ) VALUES (1 , 394 , 0);
+```
+### Updating Data:
+> Sets Bob's grade in Data Engineering to `4.0`
+```SQL
+UPDATE enrolled
+SET grade = 4.0
+WHERE sId = 2 AND cId = 394;
+```
+### Deleting Data:
+> Removes Bob from the student table
+```SQL
+DELETE FROM student
+WHERE sId = 2;
+```
+- If Bob is still enrolled in any courses, the foreign key constraint may prevent deletion.
+- Databases can be set to `ON DELETE CASCADE`, which automatically removes related enrollments, or you must manually delete from enrolled first.
+- Without a `WHERE` clause, `DELETE FROM student;` would remove all students.
