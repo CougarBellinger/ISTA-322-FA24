@@ -203,3 +203,71 @@ Here's a simple example:
 >>> print('hello my name is %s' % 'dan')
 hello my name is dan
 ```
+
+## Data Definition Language (SQL)
+### Creating a Database:
+- `CREATE DATABASE`: creates a new database
+- `IF NOT EXISTS`: prevents an error if it already exists
+##### Example:
+``` SQL
+CREATE DATABASE IF NOT EXISTS university;
+```
+### Switching to the Database:
+> Once our database exists, we need to tell the SQL server to use it for our next actions. Otherwise, we might accidentally create tables somewhere else! Note that when we use python connection, we identify the database name that we are working with to get the connection.
+
+- The `USE` command tells SQL which database we're working with
+##### Example:
+```SQL
+USE university
+```
+### Creating Tables:
+##### Student Table:
+```SQL
+CREATE TABLE IF NOT EXISTS student (
+	sId INT PRIMARY KEY,
+	name VARCHAR(255) NOT NULL
+);
+```
+- `PRIMARY KEY` makes each ID unique
+- `VARCHAR(255) NOT NULL` allows for 255 characters and no blanks allowed
+##### Course Table:
+```SQL
+CREATE TABLE IF NOT EXISTS course (
+	cId INT PRIMARY KEY,
+	name VARCHAR(255) NOT NULL
+);
+```
+##### Enrolled Table:
+```SQL
+CREATE TABLE IF NOT EXISTS enrolled (
+	sId INT,
+	cId INT,
+	grade FLOAT,
+	PRIMARY KEY (sId, cId),
+	FOREIGN KEY (sId) REFERENCES student(sId),
+	FOREIGN KEY (cId) REFERENCES course(cId)
+);
+```
+
+- `PRIMARY KEY (sId, cId)`: Creates a **Composite Key** which is a unique combination of columns
+	- student ID and course ID in this case
+- `FOREIGN KEY (sId) REFERENCES student(sId)`: Only allows enrollment for students that exist in the student table. (same for courseId)
+
+### Altering Tables:
+```SQL
+ALTER TABLE student ADD COLUMN email VARCHAR(255) UNIQUE;
+```
+- Adds an `email` column to the student table
+```SQL
+ALTER TABLE student DROP COLUMN email;
+```
+- Removes the `email` column from the table (data permanently lost)
+### Dropping and Truncating Tables:
+```SQL
+DROP TABLE enrolled;
+```
+- `DROP` deletes both table definition and its data permanently
+```SQL
+TRUNCATE TABLE enrolled;
+```
+- `TRUNCATE` deletes data but keeps definition
