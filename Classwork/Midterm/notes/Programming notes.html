@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Programming notes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="aggregating">Aggregating</h2>
+<hr>
+<h4 id="groupby-in-pandas"><code>.groupby</code> in pandas:</h4>
+<pre class="hljs"><code><div>(baby                <span class="hljs-comment"># the dataframe</span>
+ .groupby(<span class="hljs-string">'Year'</span>)    <span class="hljs-comment"># column(s) to group</span>
+ [<span class="hljs-string">'Count'</span>]           <span class="hljs-comment"># column(s) to aggregate</span>
+ .sum()              <span class="hljs-comment"># how to aggregate</span>
+)
+</div></code></pre>
+<h4 id="agg-in-pandas"><code>.agg</code> in pandas:</h4>
+<pre class="hljs"><code><div>(baby
+.groupby(<span class="hljs-string">'Year'</span>)
+.agg({<span class="hljs-string">'Count'</span>:[<span class="hljs-string">'sum'</span>]}) <span class="hljs-comment"># keys = column name; value = agg function(s) to apply</span>
+)
+</div></code></pre>
+<h2 id="sql">SQL</h2>
+<hr>
+<h3 id="general-syntax">General Syntax:</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> column1, column2, ... 
+<span class="hljs-keyword">FROM</span> table_name 
+[<span class="hljs-keyword">WHERE</span> condition] 
+[<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> column_list] 
+[<span class="hljs-keyword">HAVING</span> group_condition] 
+[<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">column</span> [<span class="hljs-keyword">ASC</span>|<span class="hljs-keyword">DESC</span>]] 
+[<span class="hljs-keyword">LIMIT</span> <span class="hljs-built_in">number</span>] 
+</div></code></pre>
+<h3 id="selecting-columns-and-filtering-rows">Selecting Columns and Filtering Rows:</h3>
+<blockquote>
+<p>Select names and salary of employees older than 30</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>employees[[<span class="hljs-string">'name'</span>, <span class="hljs-string">'salary'</span>]][employees[<span class="hljs-string">'age'</span>] &gt; <span class="hljs-number">30</span>]
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">name</span>, salary
+<span class="hljs-keyword">FROM</span> employees
+<span class="hljs-keyword">WHERE</span> age &gt; <span class="hljs-number">30</span>;
+</div></code></pre>
+<h3 id="sorting">Sorting:</h3>
+<blockquote>
+<p>Sort employees based on salary in descending order</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>employees.sort_values(<span class="hljs-string">'salary'</span>, ascending=<span class="hljs-literal">False</span>)
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> *
+<span class="hljs-keyword">FROM</span> employees
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> salary <span class="hljs-keyword">DESC</span>;
+</div></code></pre>
+<h3 id="aggregation-and-group-by">Aggregation and GROUP BY:</h3>
+<blockquote>
+<p>Aggregate the sum of salary, grouping by department</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>employee.groupby(<span class="hljs-string">'department_id'</span>)[<span class="hljs-string">'salary'</span>].sum()
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> department_id, <span class="hljs-keyword">SUM</span>(salary) <span class="hljs-keyword">as</span> total_salary
+<span class="hljs-keyword">FROM</span> employee
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> department_id;
+</div></code></pre>
+<h3 id="filtering-after-aggregation-having">Filtering After Aggregation (HAVING):</h3>
+<blockquote>
+<p>Filter salary based on comparison (after aggregation)</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>total_salary =
+employee.groupby(<span class="hljs-string">'department_id'</span>)[<span class="hljs-string">'salary'</span>].sum()
+total_salary[total_salary[<span class="hljs-string">'salary'</span>] &gt; <span class="hljs-number">150000</span>]
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> department_id, <span class="hljs-keyword">SUM</span>(salary) <span class="hljs-keyword">as</span> total_salary
+<span class="hljs-keyword">FROM</span> employee
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> department_id
+<span class="hljs-keyword">HAVING</span> <span class="hljs-keyword">SUM</span>(salary) &gt; <span class="hljs-number">150000</span>;
+</div></code></pre>
+<h3 id="multiple-aggregations">Multiple Aggregations:</h3>
+<blockquote>
+<p>Perform multiple aggregations, using multiple variables</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>employee.groupby(<span class="hljs-string">'department_id'</span>).agg({<span class="hljs-string">'salary'</span>: [<span class="hljs-string">'mean'</span>, <span class="hljs-string">'max'</span>, <span class="hljs-string">'min'</span>]})
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> department_id, <span class="hljs-keyword">AVG</span>(salary) <span class="hljs-keyword">AS</span> avg_salary, <span class="hljs-keyword">MAX</span>(salary)
+<span class="hljs-keyword">AS</span> max_salary, <span class="hljs-keyword">MIN</span>(salary) <span class="hljs-keyword">AS</span> min_salary
+<span class="hljs-keyword">FROM</span> employees
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> department_id;
+</div></code></pre>
+<h3 id="joining-tables">Joining Tables:</h3>
+<blockquote>
+<p>Join multiple tables, using keys to index the join</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>pd.merge(employee, department, on=<span class="hljs-string">'dept_id'</span>, how=<span class="hljs-string">'inner'</span>)
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> e.*, d.department_name
+<span class="hljs-keyword">FROM</span> employee e
+<span class="hljs-keyword">JOIN</span> department d
+<span class="hljs-keyword">ON</span> e.department_id = d.department_id;
+</div></code></pre>
+<h3 id="filtering-on-joined-data">Filtering on Joined Data:</h3>
+<blockquote>
+<p>Filter after joining data</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>merged = pd.merge(employee, department, on=<span class="hljs-string">'department_id'</span>)
+merged[(merged[<span class="hljs-string">'department_name'</span>] == <span class="hljs-string">'Engineering'</span>) &amp;
+(merged[<span class="hljs-string">'salary'</span>] &gt; <span class="hljs-number">80000</span>)]
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> e.first_name, e.last_name, e.salary, d.department_name
+<span class="hljs-keyword">FROM</span> employee e
+<span class="hljs-keyword">JOIN</span> department d <span class="hljs-keyword">ON</span> e.department_id = d.department_id
+<span class="hljs-keyword">WHERE</span> d.department_name = <span class="hljs-string">'Engineering'</span> <span class="hljs-keyword">AND</span> e.salary &gt; <span class="hljs-number">80000</span>;
+</div></code></pre>
+<h3 id="calculated-columns">Calculated Columns:</h3>
+<blockquote>
+<p>Performing calculations on specific columns</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>employee[<span class="hljs-string">'annual_bonus'</span>] = employees[<span class="hljs-string">'salary'</span>] * <span class="hljs-number">0.10</span>
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> first_name, last_name,
+	salary, salary * <span class="hljs-number">0.10</span> <span class="hljs-keyword">AS</span> annual_bonus
+<span class="hljs-keyword">FROM</span> employee;
+</div></code></pre>
+<h3 id="subqueries-nested-queries">Subqueries (Nested Queries)</h3>
+<blockquote>
+<p>Self explanatory...</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>avg_salary = employee[<span class="hljs-string">'salary'</span>].mean()
+employee[employee[<span class="hljs-string">'salary'</span>] &gt; avg_salary]
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> *
+<span class="hljs-keyword">FROM</span> employee
+<span class="hljs-keyword">WHERE</span> salary &gt; (
+	<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">AVG</span>(salary) <span class="hljs-keyword">FROM</span> employee
+);
+</div></code></pre>
+<h3 id="in-not-in-and-exists">IN, NOT IN, and EXISTS:</h3>
+<blockquote>
+<p>Discrete filtering</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>exclude_depts = department[(department[<span class="hljs-string">'department_name'</span>] == <span class="hljs-string">'HR'</span>) | (department[<span class="hljs-string">'department)name'</span>] == <span class="hljs-string">'Marketing'</span>)][<span class="hljs-string">'deparment_id'</span>]
+employee[~employee[<span class="hljs-string">'department_id'</span>].isin(exclude_depts)]
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> *
+<span class="hljs-keyword">FROM</span> employees
+<span class="hljs-keyword">WHERE</span> department_is <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> (<span class="hljs-keyword">SELECT</span> department_id
+	<span class="hljs-keyword">FROM</span> department
+	<span class="hljs-keyword">WHERE</span> department_name = <span class="hljs-string">'HR'</span> <span class="hljs-keyword">OR</span> department_name = <span class="hljs-string">'Marketing'</span>);
+</div></code></pre>
+<h3 id="null-values-and-missing-data">Null Values and Missing Data:</h3>
+<blockquote>
+<p>Null filtering</p>
+</blockquote>
+<h4 id="pandas"><code>Pandas</code>:</h4>
+<pre class="hljs"><code><div>employee[employee[<span class="hljs-string">'salary'</span>].isnull()]
+employee[employee[<span class="hljs-string">'salary'</span>].notnull()]
+</div></code></pre>
+<h4 id="sql"><code>SQL</code>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> salary <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span>;
+<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> salary <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>;
+</div></code></pre>
+<h3 id="strings-in-sql">Strings in SQL:</h3>
+<p><code>%s</code> as a placeholder operator that allows you to pass a specified value into a string.
+You specify what value you want to place there by using <code>%</code> and then what you want to insert.
+Here's a simple example:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-string">'hello my name is %s'</span> % <span class="hljs-string">'dan'</span>)
+hello my name <span class="hljs-keyword">is</span> dan
+</div></code></pre>
+<h2 id="data-definition-language-sql">Data Definition Language (SQL)</h2>
+<h3 id="creating-a-database">Creating a Database:</h3>
+<ul>
+<li><code>CREATE DATABASE</code>: creates a new database</li>
+<li><code>IF NOT EXISTS</code>: prevents an error if it already exists</li>
+</ul>
+<h5 id="example">Example:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> university;
+</div></code></pre>
+<h3 id="switching-to-the-database">Switching to the Database:</h3>
+<blockquote>
+<p>Once our database exists, we need to tell the SQL server to use it for our next actions. Otherwise, we might accidentally create tables somewhere else! Note that when we use python connection, we identify the database name that we are working with to get the connection.</p>
+</blockquote>
+<ul>
+<li>The <code>USE</code> command tells SQL which database we're working with</li>
+</ul>
+<h5 id="example">Example:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">USE</span> university
+</div></code></pre>
+<h3 id="creating-tables">Creating Tables:</h3>
+<h5 id="student-table">Student Table:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> student (
+	<span class="hljs-keyword">sId</span> <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+	<span class="hljs-keyword">name</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+);
+</div></code></pre>
+<ul>
+<li><code>PRIMARY KEY</code> makes each ID unique</li>
+<li><code>VARCHAR(255) NOT NULL</code> allows for 255 characters and no blanks allowed</li>
+</ul>
+<h5 id="course-table">Course Table:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> course (
+	cId <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+	<span class="hljs-keyword">name</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+);
+</div></code></pre>
+<h5 id="enrolled-table">Enrolled Table:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> enrolled (
+	<span class="hljs-keyword">sId</span> <span class="hljs-built_in">INT</span>,
+	cId <span class="hljs-built_in">INT</span>,
+	grade <span class="hljs-built_in">FLOAT</span>,
+	PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-keyword">sId</span>, cId),
+	<span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (<span class="hljs-keyword">sId</span>) <span class="hljs-keyword">REFERENCES</span> student(<span class="hljs-keyword">sId</span>),
+	<span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (cId) <span class="hljs-keyword">REFERENCES</span> course(cId)
+);
+</div></code></pre>
+<ul>
+<li><code>PRIMARY KEY (sId, cId)</code>: Creates a <strong>Composite Key</strong> which is a unique combination of columns
+<ul>
+<li>student ID and course ID in this case</li>
+</ul>
+</li>
+<li><code>FOREIGN KEY (sId) REFERENCES student(sId)</code>: Only allows enrollment for students that exist in the student table. (same for courseId)</li>
+</ul>
+<h3 id="altering-tables">Altering Tables:</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> student <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">COLUMN</span> email <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">UNIQUE</span>;
+</div></code></pre>
+<ul>
+<li>Adds an <code>email</code> column to the student table</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> student <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">COLUMN</span> email;
+</div></code></pre>
+<ul>
+<li>Removes the <code>email</code> column from the table (data permanently lost)</li>
+</ul>
+<h3 id="dropping-and-truncating-tables">Dropping and Truncating Tables:</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> enrolled;
+</div></code></pre>
+<ul>
+<li><code>DROP</code> deletes both table definition and its data permanently</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">TRUNCATE</span> <span class="hljs-keyword">TABLE</span> enrolled;
+</div></code></pre>
+<ul>
+<li><code>TRUNCATE</code> deletes data but keeps definition</li>
+</ul>
+<h2 id="data-manipulation-language-sql">Data Manipulation Language (SQL)</h2>
+<h3 id="schema-setup">Schema Setup:</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> student (
+	<span class="hljs-keyword">sId</span> <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+	<span class="hljs-keyword">name</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> course (
+	cId <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+	<span class="hljs-keyword">name</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> enrolled (
+	<span class="hljs-keyword">sId</span> <span class="hljs-built_in">INT</span>,
+	cId <span class="hljs-built_in">INT</span>,
+	grade <span class="hljs-built_in">FLOAT</span>,
+	PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-keyword">sId</span>, cId),
+	<span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (<span class="hljs-keyword">sId</span>) <span class="hljs-keyword">REFERENCES</span> student (<span class="hljs-keyword">sId</span>),
+	<span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (cId) <span class="hljs-keyword">REFERENCES</span> course (cId)
+);
+</div></code></pre>
+<p>![[Pasted image 20250929193218.png]]</p>
+<h3 id="inserting-data">Inserting Data:</h3>
+<ul>
+<li><code>INSERT INTO</code>: Adds rows to a table</li>
+</ul>
+<h5 id="using-tuples-to-insert-df-data">Using tuples to insert DF data:</h5>
+<pre class="hljs"><code><div><span class="hljs-comment">#load data</span>
+data_tups = [tuple(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> judge_df.to_numpy()]
+
+insert_query = <span class="hljs-string">'''
+INSERT INTO casedb_judge(judge_id, judge_name, party_name, gender_name, race_name) 
+VALUES (%s, %s, %s, %s, %s);
+'''</span>
+
+conn, cur = get_conn_cur()
+cur.executemany(insert_query, data_tups)
+conn.commit() <span class="hljs-comment"># commit</span>
+cur.close() <span class="hljs-comment"># close</span>
+conn.close() <span class="hljs-comment"># close</span>
+</div></code></pre>
+<h5 id="adding-students">Adding Students:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> student ( <span class="hljs-keyword">sId</span> , <span class="hljs-keyword">name</span> ) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">1</span> , ’ Alice ’);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> student ( <span class="hljs-keyword">sId</span> , <span class="hljs-keyword">name</span> ) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">2</span> , ’ Bob ’);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> student ( <span class="hljs-keyword">sId</span> , <span class="hljs-keyword">name</span> ) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">3</span> , ’ Sara ’);
+</div></code></pre>
+<h5 id="adding-courses">Adding Courses:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> course ( cId , <span class="hljs-keyword">name</span> ) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">480</span> , ’ <span class="hljs-keyword">Database</span> Systems ’);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> course ( cId , <span class="hljs-keyword">name</span> ) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">394</span> , ’ <span class="hljs-keyword">Data</span> Engineering ’);
+</div></code></pre>
+<h5 id="enrolling-students-in-courses">Enrolling Students in Courses:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> enrolled ( <span class="hljs-keyword">sId</span> , cId , grade ) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">1</span> , <span class="hljs-number">480</span> , <span class="hljs-number">0</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> enrolled ( <span class="hljs-keyword">sId</span> , cId , grade ) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">2</span> , <span class="hljs-number">394</span> , <span class="hljs-number">0</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> enrolled ( <span class="hljs-keyword">sId</span> , cId , grade ) <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">1</span> , <span class="hljs-number">394</span> , <span class="hljs-number">0</span>);
+</div></code></pre>
+<h3 id="updating-data">Updating Data:</h3>
+<blockquote>
+<p>Sets Bob's grade in Data Engineering to <code>4.0</code></p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-keyword">UPDATE</span> enrolled
+<span class="hljs-keyword">SET</span> grade = <span class="hljs-number">4.0</span>
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">sId</span> = <span class="hljs-number">2</span> <span class="hljs-keyword">AND</span> cId = <span class="hljs-number">394</span>;
+</div></code></pre>
+<h3 id="deleting-data">Deleting Data:</h3>
+<blockquote>
+<p>Removes Bob from the student table</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> student
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">sId</span> = <span class="hljs-number">2</span>;
+</div></code></pre>
+<ul>
+<li>If Bob is still enrolled in any courses, the foreign key constraint may prevent deletion.</li>
+<li>Databases can be set to <code>ON DELETE CASCADE</code>, which automatically removes related enrollments, or you must manually delete from enrolled first.</li>
+<li>Without a <code>WHERE</code> clause, <code>DELETE FROM student;</code> would remove all students.</li>
+</ul>
+
+</body>
+</html>

@@ -2,9 +2,9 @@
 #### `get_conn_cur()`:
 > Returns connector and cursor instance for database access
 ```Python
-mysql_address  = '131.193.32.85'
-mysql_username='de_student'
-mysql_password='DE_Student_PaSS'
+mysql_address  = 'my-dataengineering-db.chg62e6gampt.us-east-2.rds.amazonaws.com'
+mysql_username='cougarbellinger'
+mysql_password='raZV&hDe3nykXf#QhxNN'
 #We are going to use a single database for all databases in this course.
 
 #To avoid confusion, we use databasename_tablename naming convention.
@@ -73,4 +73,15 @@ def run_query(query_string):
   conn.close() # close
   
   return result_df
+```
+#### `sql_head()`:
+```python
+
+def sql_head(table_name):
+    qs = """
+    SELECT *
+    FROM %s
+    LIMIT 5
+    """ % table_name
+    return run_query(qs)
 ```

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Midterm Study Guide -- ISTA322 Fall 2025</title>
+    </head>
+    <body style="color: #202122">
+        <h1>Midterm Study Guide</h1>
+        <p>ISTA322 Fall 2025</p>
+
+        <hr />
+
+        <h3>About:</h3>
+        <p>
+            The style of questions are similar to previous quizzes and homework.
+            You have to answer simple questions or write piece of code to
+            deliver the requested information. We are going to use the datasets
+            that we seen before, however, you won't have a working notebook, and
+            you must type in your answer. Simple mistakes and typos will be
+            excused. You should also expect short answer questions from the
+            lectures.
+        </p>
+
+        <p>
+            The operations that you should know is limited to what we have
+            practiced in the notebooks. We will use the similar data/databases.
+        </p>
+
+        <h3>Topics:</h3>
+        <p>
+            1- [<a
+                href=".\notes\Week 1 -- Intro to Data Engineering.html"
+                target="_blank"
+                >notes</a
+            >] Types of data (structured, unstructured, semi-structured) and
+            their examples
+            
+        </p>
+        <p>
+            2- [<s><a href="" target="_blank">notes</a></s>] Pyramid of needs
+        </p>
+        <p>
+            3- [<s><a href="" target="_blank">notes</a></s>] ETL and examples
+        </p>
+        <p>
+            4- [<a href="./notes/Lecture 3 -- Working with Data.html" target="_blank">notes</a>] Data Types and formats
+        </p>
+        <p>
+            5- [<a href="./notes/Lecture 4 -- Transforms.html" target="_blank">notes</a>] Data Transform
+        </p>
+        <p>
+            6- [<s><a href="" target="_blank">notes</a></s>] Data aggregation and Join
+        </p>
+        <p>
+            7- [<s><a href="" target="_blank">notes</a></s>] JSON transform and Flattening
+        </p>
+        <p>
+            8- [<a href="./notes/Week 5 -- Intro to SQL.html" target="_blank">notes</a>] SQL (select, group by, having, order by, join, nested query)
+        </p>
+        <p>
+            9- [<a href="./notes/Programming notes.html" target="_blank">notes</a>] Programming Notes
+        </p>
+
+        <h3>Examples:</h3>
+        <strong>Example 1:</strong>
+        <p>
+            Given the price dataframe (only the head is shown here), write a
+            code to find the average closing price between 2010-01-01 and
+            2020-01-01.
+        </p>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>Open</th>
+                    <th>High</th>
+                    <th>Low</th>
+                    <th>Close</th>
+                    <th>Adj Close</th>
+                    <th>Volume</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>0</th>
+                    <td>1997-05-15</td>
+                    <td>2.437500</td>
+                    <td>2.500000</td>
+                    <td>1.927083</td>
+                    <td>1.958333</td>
+                    <td>1.958333</td>
+                    <td>72156000</td>
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <td>1997-05-16</td>
+                    <td>1.968750</td>
+                    <td>1.979167</td>
+                    <td>1.708333</td>
+                    <td>1.729167</td>
+                    <td>1.729167</td>
+                    <td>14700000</td>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <td>1997-05-19</td>
+                    <td>1.760417</td>
+                    <td>1.770833</td>
+                    <td>1.625000</td>
+                    <td>1.708333</td>
+                    <td>1.708333</td>
+                    <td>6106800</td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td>1997-05-20</td>
+                    <td>1.729167</td>
+                    <td>1.750000</td>
+                    <td>1.635417</td>
+                    <td>1.635417</td>
+                    <td>1.635417</td>
+                    <td>5467200</td>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <td>1997-05-21</td>
+                    <td>1.635417</td>
+                    <td>1.645833</td>
+                    <td>1.375000</td>
+                    <td>1.427083</td>
+                    <td>1.427083</td>
+                    <td>18853200</td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+
+        <strong>Example 2:</strong>
+        <p>
+            Using the following dataset, find the ratio of male to female
+            babies over the year. Write down the appropriate code.
+        </p>
+        <p>
+            baby = pd.read_csv('<a
+                href="https://docs.google.com/spreadsheets/d/18WZQ8JB03qRIsG6R2_-nhdrU9erAzRvcMwYGtzTWx-w/gviz/tq?tqx=out:csv')"
+                >https://docs.google.com/spreadsheets/d/18WZQ8JB03qRIsG6R2_-nhdrU9erAzRvcMwYGtzTWx-w/gviz/tq?tqx=out:csv')</a
+            >
+        </p>
+        <p>
+            Write a series of statements to construct a data frame that only
+            contains the Year and Female to Male ratio based on the baby name
+            data. Sort the data frame based on Year and write the code to plot
+            the ratio vs year.
+        </p>
+        <p>Sample output:</p>
+        <p>
+            <br /><img
+                src="ratio.png"
+                alt="ratio"
+                title="ratio"
+                data-d2l-editor-default-img-style="true"
+                style="max-width: 100%"
+            />
+        </p>
+        <p></p>
+        <p>
+            <img
+                src="Unknown-2.png"
+                alt="plot"
+                title="plot"
+                data-d2l-editor-default-img-style="true"
+                style="max-width: 100%"
+            />
+        </p>
+        <ol style="list-style-type: none">
+            <li></li>
+        </ol>
+
+        <h3>Practice:</h3>
+        <p><strong>Data Aggregation:</strong></p>
+        <ul style="list-style-type: disc">
+            <li>
+                Use appropriate aggregation functions (<code>SUM</code>,
+                <code>AVG</code>, <code>COUNT</code>, etc.) based on the data
+                and the analysis required.
+            </li>
+            <li>
+                Always include a <code>GROUP BY</code> clause when using
+                aggregation functions to specify the grouping criteria.
+            </li>
+            <li>
+                Use <code>HAVING</code> to filter aggregated data based on
+                conditions.
+            </li>
+        </ul>
+        <p><strong>Join:</strong></p>
+        <ul style="list-style-type: disc">
+            <li>
+                Choose the right type of join (<code>JOIN</code>,
+                <code>LEFT JOIN</code>, <code>RIGHT JOIN</code>) based on the
+                relationship between the data you need.
+            </li>
+            <li>
+                Use meaningful table aliases to make the query more readable.
+            </li>
+            <li>
+                Always join tables on indexed columns to improve performance.
+            </li>
+            <li>
+                Be cautious of duplicate column names when joining tables; use
+                aliases to differentiate them.
+            </li>
+        </ul>
+        <h3>JSON Transform and Flattening</h3>
+        <ul style="list-style-type: disc">
+            <li>
+                Use libraries like Pandas in Python
+                (<code>json_normalize</code>) to flatten nested JSON structures
+                into tabular data.
+            </li>
+            <li>
+                Understand the structure of your JSON data to determine the
+                level of nesting and the keys you need to extract.
+            </li>
+            <li>
+                When dealing with deeply nested JSON, consider breaking down the
+                transformation process into multiple steps for clarity.
+            </li>
+        </ul>
+        <h3>SQL (SELECT, GROUP BY, HAVING, ORDER BY, JOIN, Nested Query)</h3>
+        <p><strong>SELECT:</strong></p>
+        <ul style="list-style-type: disc">
+            <li>
+                Be specific about the columns you select to improve query
+                performance and readability.
+            </li>
+        </ul>
+        <p><strong>GROUP BY:</strong></p>
+        <ul style="list-style-type: disc">
+            <li>
+                Use <code>GROUP BY</code> to aggregate data into groups based on
+                one or more columns.
+            </li>
+            <li>
+                Ensure that all selected columns are either part of the
+                <code>GROUP BY</code> clause or are used within an aggregate
+                function.
+            </li>
+        </ul>
+        <p><strong>HAVING:</strong></p>
+        <ul style="list-style-type: disc">
+            <li>
+                Use <code>HAVING</code> to filter aggregated data, applying
+                conditions to groups rather than individual rows.
+            </li>
+        </ul>
+        <p><strong>ORDER BY:</strong></p>
+        <ul style="list-style-type: disc">
+            <li>
+                Use <code>ORDER BY</code> to sort the results based on one or
+                more columns.
+            </li>
+            <li>
+                Specify the sort direction (<code>ASC</code> for ascending,
+                <code>DESC</code> for descending) if needed.
+            </li>
+        </ul>
+        <p><strong>JOIN:</strong></p>
+        <ul style="list-style-type: disc">
+            <li>
+                Use the appropriate type of join based on the relationship
+                between tables and the data required.
+            </li>
+            <li>
+                Always specify the joining condition to avoid Cartesian
+                products, which can lead to performance issues.
+            </li>
+        </ul>
+        <p><strong>Nested Query:</strong></p>
+        <ul style="list-style-type: disc">
+            <li>
+                Use nested queries (subqueries) to break down complex queries
+                into manageable parts.
+            </li>
+            <li>
+                Ensure that nested queries are properly correlated with the
+                outer query, if necessary.
+            </li>
+            <li>
+                Use subqueries in the <code>FROM</code> clause to create derived
+                tables for further manipulation.
+            </li>
+        </ul>
+        <p></p>
+        
+    </body>
+</html>

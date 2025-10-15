@@ -298,6 +298,22 @@ CREATE TABLE enrolled (
 ![[Pasted image 20250929193218.png]]
 ### Inserting Data:
 - `INSERT INTO`: Adds rows to a table
+##### Using tuples to insert DF data:
+```python
+#load data
+data_tups = [tuple(x) for x in judge_df.to_numpy()]
+
+insert_query = '''
+INSERT INTO casedb_judge(judge_id, judge_name, party_name, gender_name, race_name) 
+VALUES (%s, %s, %s, %s, %s);
+'''
+
+conn, cur = get_conn_cur()
+cur.executemany(insert_query, data_tups)
+conn.commit() # commit
+cur.close() # close
+conn.close() # close
+```
 ##### Adding Students:
 ```SQL
 INSERT INTO student ( sId , name ) VALUES (1 , ’ Alice ’);
@@ -315,6 +331,7 @@ INSERT INTO enrolled ( sId , cId , grade ) VALUES (1 , 480 , 0);
 INSERT INTO enrolled ( sId , cId , grade ) VALUES (2 , 394 , 0);
 INSERT INTO enrolled ( sId , cId , grade ) VALUES (1 , 394 , 0);
 ```
+
 ### Updating Data:
 > Sets Bob's grade in Data Engineering to `4.0`
 ```SQL
