@@ -61,7 +61,7 @@ ORDER BY salary DESC;
 ```Python
 employee.groupby('department_id')['salary'].sum()
 ```
-#### `SQL`:
+	#### `SQL`:
 ``` SQL
 SELECT department_id, SUM(salary) as total_salary
 FROM employee
